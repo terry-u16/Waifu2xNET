@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Waifu2xNET.CLR", "Waifu2xNET.CLR\Waifu2xNET.CLR.vcxproj", "{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "waifu2x-converter-cpp", "waifu2x-converter-cpp", "{7892DE20-DABB-41FC-9400-62E0811B62F1}"
+	ProjectSection(SolutionItems) = preProject
+		waifu2x-converter-cpp\w2xconv.h = waifu2x-converter-cpp\w2xconv.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "x64", "x64", "{1C46CA0C-F324-4227-8185-6DA420C92DCC}"
+	ProjectSection(SolutionItems) = preProject
+		waifu2x-converter-cpp\x64\w2xc.dll = waifu2x-converter-cpp\x64\w2xc.dll
+		waifu2x-converter-cpp\x64\w2xc.lib = waifu2x-converter-cpp\x64\w2xc.lib
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "x86", "x86", "{FC885081-A76E-409F-B58C-2201EFB6D5FB}"
+	ProjectSection(SolutionItems) = preProject
+		waifu2x-converter-cpp\x86\w2xc.dll = waifu2x-converter-cpp\x86\w2xc.dll
+		waifu2x-converter-cpp\x86\w2xc.lib = waifu2x-converter-cpp\x86\w2xc.lib
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "models_rgb", "models_rgb", "{27E68D02-57FA-40E7-B2CB-B08953AF1026}"
+	ProjectSection(SolutionItems) = preProject
+		waifu2x-converter-cpp\models_rgb\noise1_model.json = waifu2x-converter-cpp\models_rgb\noise1_model.json
+		waifu2x-converter-cpp\models_rgb\noise2_model.json = waifu2x-converter-cpp\models_rgb\noise2_model.json
+		waifu2x-converter-cpp\models_rgb\scale2.0x_model.json = waifu2x-converter-cpp\models_rgb\scale2.0x_model.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "models", "models", "{176205E0-FB25-40E4-BBE6-25607F4DC1D2}"
+	ProjectSection(SolutionItems) = preProject
+		waifu2x-converter-cpp\models\noise1_model.json = waifu2x-converter-cpp\models\noise1_model.json
+		waifu2x-converter-cpp\models\noise2_model.json = waifu2x-converter-cpp\models\noise2_model.json
+		waifu2x-converter-cpp\models\scale2.0x_model.json = waifu2x-converter-cpp\models\scale2.0x_model.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waifu2xNET.Console", "Waifu2xNET.Console\Waifu2xNET.Console.csproj", "{B3F0979F-7D53-4941-BB93-007ABE596B11}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Debug|x64.ActiveCfg = Debug|x64
+		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Debug|x64.Build.0 = Debug|x64
+		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Debug|x86.ActiveCfg = Debug|Win32
+		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Debug|x86.Build.0 = Debug|Win32
+		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Release|x64.ActiveCfg = Release|x64
+		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Release|x64.Build.0 = Release|x64
+		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Release|x86.ActiveCfg = Release|Win32
+		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Release|x86.Build.0 = Release|Win32
+		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Debug|x64.ActiveCfg = Debug|x64
+		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Debug|x64.Build.0 = Debug|x64
+		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Debug|x86.ActiveCfg = Debug|x86
+		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Debug|x86.Build.0 = Debug|x86
+		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|x64.ActiveCfg = Release|x64
+		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|x64.Build.0 = Release|x64
+		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|x86.ActiveCfg = Release|x86
+		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1C46CA0C-F324-4227-8185-6DA420C92DCC} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
+		{FC885081-A76E-409F-B58C-2201EFB6D5FB} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
+		{27E68D02-57FA-40E7-B2CB-B08953AF1026} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
+		{176205E0-FB25-40E4-BBE6-25607F4DC1D2} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
+	EndGlobalSection
+EndGlobal
