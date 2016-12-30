@@ -88,7 +88,9 @@ namespace Waifu2xNET {
 			~Waifu2xConverter();
 			!Waifu2xConverter();
 
+			System::Threading::Tasks::Task^ ConvertFileAsync(String^ sourcePath, String^ distinationPath, DenoiseLevel denoiseLevel, double Scale);
 			System::Threading::Tasks::Task^ ConvertFileAsync(String^ sourcePath, String^ distinationPath, DenoiseLevel denoiseLevel, double Scale, int blockSize);
+			System::Threading::Tasks::Task<System::Windows::Media::Imaging::WriteableBitmap^>^ ConvertAsync(System::Windows::Media::Imaging::BitmapSource^ source, DenoiseLevel denoiseLevel, double scale);
 			System::Threading::Tasks::Task<System::Windows::Media::Imaging::WriteableBitmap^>^ ConvertAsync(System::Windows::Media::Imaging::BitmapSource^ source, DenoiseLevel denoiseLevel, double scale, int blockSize);
 		};
 

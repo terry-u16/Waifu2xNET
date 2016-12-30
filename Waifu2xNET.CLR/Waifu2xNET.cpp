@@ -80,6 +80,12 @@ void Waifu2xConverter::ConvertFileHelper::ConvertFile()
 	}
 }
 
+Task ^ Waifu2xConverter::ConvertFileAsync(String^ sourcePath, String^ distinationPath, DenoiseLevel denoiseLevel, double scale)
+{
+	return ConvertFileAsync(sourcePath, distinationPath, denoiseLevel, scale, 0);
+}
+
+
 Task ^ Waifu2xConverter::ConvertFileAsync(String^ sourcePath, String^ distinationPath, DenoiseLevel denoiseLevel, double scale, int blockSize)
 {
 	auto helper = gcnew Waifu2xConverter::ConvertFileHelper(converter, sourcePath, distinationPath, denoiseLevel, scale, blockSize);
@@ -104,6 +110,10 @@ WriteableBitmap^ Waifu2xConverter::ConvertHelper::Convert()
 	return resultBGR24;
 }
 
+Task<WriteableBitmap^>^ Waifu2xConverter::ConvertAsync(BitmapSource^ source, DenoiseLevel denoiseLevel, double scale)
+{
+	return ConvertAsync(source, denoiseLevel, scale, 0);
+}
 
 Task<WriteableBitmap^>^ Waifu2xConverter::ConvertAsync(BitmapSource^ source, DenoiseLevel denoiseLevel, double scale, int blockSize)
 {

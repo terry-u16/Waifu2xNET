@@ -21,7 +21,6 @@ namespace Waifu2xNET.Console
                 return;
             }
 
-            //ConvertFromFile(args).Wait();
             ConvertInMemory(args).Wait();
 
             System.Console.WriteLine("Press any key...");
@@ -45,7 +44,7 @@ namespace Waifu2xNET.Console
                     var source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
                     source.Freeze();
 
-                    var result = await converter.ConvertAsync(source, DenoiseLevel.Level1, 2.0, 128);
+                    var result = await converter.ConvertAsync(source, DenoiseLevel.Level1, 2.0);
 
                     using (var writer = new FileStream(newFilePath, FileMode.Create))
                     {
@@ -71,8 +70,7 @@ namespace Waifu2xNET.Console
                 {
                     System.Console.WriteLine($"Converting... : {path}");
                     var newFilePath = GetNewFilePath(path);
-                    await converter.ConvertFileAsync(path, newFilePath,
-                        DenoiseLevel.Level1, 2.0, 128);
+                    await converter.ConvertFileAsync(path, newFilePath, DenoiseLevel.Level1, 2.0);
                     System.Console.WriteLine($"Converted : {newFilePath}");
                 }
                 System.Console.WriteLine("Completed.");
