@@ -14,11 +14,10 @@ using namespace Waifu2xNET::CLR;
 /// 画像の拡大に用いる<c>Waifu2xConverter</c>クラスのインスタンスを生成します。
 /// </summary>
 /// <param name="gpuMode">画像拡大時のGPU使用モード</param>
-/// <param name="model">画像拡大時に用いるモデル</param>
 /// <returns>Waifu2xConverterクラスのインスタンス</returns>
 /// <exception cref="System::IO::FileLoadException"/>
 /// <exception cref="System::InvalidOperationException"/>
-Waifu2xConverter::Waifu2xConverter(GpuMode gpuMode, ConvertModel model)
+Waifu2xConverter::Waifu2xConverter(GpuMode gpuMode)
 {
 	W2XConvGPUMode nativeGPUMode;
 
@@ -38,21 +37,8 @@ Waifu2xConverter::Waifu2xConverter(GpuMode gpuMode, ConvertModel model)
 	}
 
 	converter = w2xconv_init(nativeGPUMode, 0, 0);
-	convertModel = model;
 
-	char* modelPath;
-
-	switch (model)
-	{
-	case Waifu2xNET::CLR::ConvertModel::RGB:
-		modelPath = "models_rgb";
-		break;
-	case Waifu2xNET::CLR::ConvertModel::YUV:
-		modelPath = "models";
-		break;
-	default:
-		throw gcnew ArgumentException("モデルのタイプが不正です。");
-	}
+	char* modelPath = "models_rgb";
 
 	if (w2xconv_load_models(converter, modelPath) < 0)
 	{

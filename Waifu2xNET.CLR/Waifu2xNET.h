@@ -46,28 +46,12 @@ namespace Waifu2xNET {
 		};
 
 		/// <summary>
-		/// 画像拡大時に用いるモデルを表します。
-		/// </summary>
-		public enum class ConvertModel
-		{
-			/// <summary>
-			/// RGBモデルを使用します。（推奨）
-			/// </summary>
-			RGB,
-			/// <summary>
-			/// YUVモデルを使用します。
-			/// </summary>
-			YUV
-		};
-
-		/// <summary>
 		/// waifu2xのアルゴリズムを用いて画像の拡大処理を行うクラスです。
 		/// </summary>
 		public ref class Waifu2xConverter
 		{
 		private:
 			W2XConv* converter;
-			ConvertModel convertModel;
 
 			ref class ConvertFileHelper
 			{
@@ -100,7 +84,7 @@ namespace Waifu2xNET {
 			};
 
 		public:
-			Waifu2xConverter(GpuMode gpuMode, ConvertModel model);
+			Waifu2xConverter(GpuMode gpuMode);
 			~Waifu2xConverter();
 			!Waifu2xConverter();
 

@@ -199,13 +199,6 @@ W2XCONV_EXPORT int w2xconv_convert_rgb_f32(struct W2XConv *conv,
 					   double scale,
 					   int block_size);
 
-W2XCONV_EXPORT int w2xconv_convert_yuv(struct W2XConv *conv,
-				       unsigned char *dst, size_t dst_step_byte, /* float32x3 normalized[0-1] (src_w*ratio, src_h*ratio) */
-				       unsigned char *src, size_t src_step_byte, /* float32x3 normalized[0-1] (src_w, src_h) */
-				       int denoise_level, /* 0:none, 1:L1 denoise, other:L2 denoise  */
-				       double scale,
-				       int block_size);
-
 W2XCONV_EXPORT int w2xconv_apply_filter_y(struct W2XConv *conv,
 					  enum W2XConvFilterType type,
 					  unsigned char *dst, size_t dst_step_byte, /* float32x1 normalized[0-1] (src_w, src_h) */

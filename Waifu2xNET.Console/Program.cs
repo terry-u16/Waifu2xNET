@@ -30,7 +30,7 @@ namespace Waifu2xNET.Console
 
         static async Task ConvertInMemory(string[] pathList)
         {
-            using (var converter = new Waifu2xConverter(GpuMode.Auto, ConvertModel.RGB))
+            using (var converter = new Waifu2xConverter(GpuMode.Auto))
             {
                 System.Console.WriteLine("Initialized.");
 
@@ -62,7 +62,7 @@ namespace Waifu2xNET.Console
 
         static async Task ConvertFromFile(string[] pathList)
         {
-            using (var converter = new Waifu2xConverter(GpuMode.Auto, ConvertModel.RGB))
+            using (var converter = new Waifu2xConverter(GpuMode.Auto))
             {
                 System.Console.WriteLine("Initialized.");
 
