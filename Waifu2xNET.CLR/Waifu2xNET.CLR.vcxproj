@@ -95,7 +95,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>w2xc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)waifu2x-converter-cpp\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)waifu2x-converter-cpp\dll_x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -109,7 +109,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>w2xc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)waifu2x-converter-cpp\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)waifu2x-converter-cpp\dll_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -121,7 +121,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>w2xc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)waifu2x-converter-cpp\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)waifu2x-converter-cpp\dll_x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -134,7 +134,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>w2xc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)waifu2x-converter-cpp\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)waifu2x-converter-cpp\dll_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
