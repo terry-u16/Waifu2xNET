@@ -22,17 +22,32 @@ namespace Waifu2xNET {
 			Disable
 		};
 
+		/// <summary>
+		/// ノイズ除去フィルタの強さを表します。
+		/// </summary>
 		public enum class DenoiseLevel
 		{
+			/// <summary>
+			/// ノイズ除去なし（PNGファイル向け）
+			/// </summary>
 			None = 0,
+			/// <summary>
+			/// ノイズ除去弱（一般のJPEGファイル向け）
+			/// </summary>
 			Level1 = 1,
+			/// <summary>
+			/// ノイズ除去強（ノイズの多いJPEGファイル向け）
+			/// </summary>
 			Level2 = 2
 		};
 
+		/// <summary>
+		/// 画像拡大時に用いるモデルを表します。
+		/// </summary>
 		public enum class ConvertModel
 		{
 			/// <summary>
-			/// RGBモデルを使用します。
+			/// RGBモデルを使用します。（推奨）
 			/// </summary>
 			RGB,
 			/// <summary>
@@ -60,8 +75,8 @@ namespace Waifu2xNET {
 				double scale;
 				int blockSize;
 			public:
-				ConvertFileHelper(W2XConv* converter, String^ sourcePath, String^ distinationPath, DenoiseLevel denoiseLevel, double scale, int blockSize)
-					: converter(converter), sourcePath(sourcePath), distinationPath(distinationPath), denoiseLevel(denoiseLevel), scale(scale), blockSize(blockSize) {}
+				ConvertFileHelper(W2XConv* converter, String^ sourcePath, String^ destinationPath, DenoiseLevel denoiseLevel, double scale, int blockSize)
+					: converter(converter), sourcePath(sourcePath), distinationPath(destinationPath), denoiseLevel(denoiseLevel), scale(scale), blockSize(blockSize) {}
 				void ConvertFile();
 			};
 
@@ -81,15 +96,12 @@ namespace Waifu2xNET {
 			};
 
 		public:
-			/// <summary>
-			/// waifu2xのアルゴリズムを用いて画像の拡大処理を行うクラスです。
-			/// </summary>
 			Waifu2xConverter(GpuMode gpuMode, ConvertModel model);
 			~Waifu2xConverter();
 			!Waifu2xConverter();
 
-			System::Threading::Tasks::Task^ ConvertFileAsync(String^ sourcePath, String^ distinationPath, DenoiseLevel denoiseLevel, double Scale);
-			System::Threading::Tasks::Task^ ConvertFileAsync(String^ sourcePath, String^ distinationPath, DenoiseLevel denoiseLevel, double Scale, int blockSize);
+			System::Threading::Tasks::Task^ ConvertFileAsync(String^ sourcePath, String^ destinationPath, DenoiseLevel denoiseLevel, double scale);
+			System::Threading::Tasks::Task^ ConvertFileAsync(String^ sourcePath, String^ destinationPath, DenoiseLevel denoiseLevel, double scale, int blockSize);
 			System::Threading::Tasks::Task<System::Windows::Media::Imaging::WriteableBitmap^>^ ConvertAsync(System::Windows::Media::Imaging::BitmapSource^ source, DenoiseLevel denoiseLevel, double scale);
 			System::Threading::Tasks::Task<System::Windows::Media::Imaging::WriteableBitmap^>^ ConvertAsync(System::Windows::Media::Imaging::BitmapSource^ source, DenoiseLevel denoiseLevel, double scale, int blockSize);
 		};

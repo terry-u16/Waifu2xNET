@@ -10,6 +10,14 @@ using namespace System::Windows::Media::Imaging;
 using namespace msclr::interop;
 using namespace Waifu2xNET::CLR;
 
+/// <summary>
+/// 画像の拡大に用いる<c>Waifu2xConverter</c>クラスのインスタンスを生成します。
+/// </summary>
+/// <param name="gpuMode">画像拡大時のGPU使用モード</param>
+/// <param name="model">画像拡大時に用いるモデル</param>
+/// <returns>Waifu2xConverterクラスのインスタンス</returns>
+/// <exception cref="System::IO::FileLoadException"/>
+/// <exception cref="System::InvalidOperationException"/>
 Waifu2xConverter::Waifu2xConverter(GpuMode gpuMode, ConvertModel model)
 {
 	converter = w2xconv_init(gpuMode == GpuMode::Auto ? W2XCONV_GPU_AUTO : W2XCONV_GPU_DISABLE, 0, 0);
@@ -43,16 +51,21 @@ Waifu2xConverter::Waifu2xConverter(GpuMode gpuMode, ConvertModel model)
 	}
 }
 
+/// <summary>
+/// <c>Waifu2xConverter</c>クラスの持つアンマネージドリソースの解放を行います。
+/// </summary>
 Waifu2xConverter::~Waifu2xConverter()
 {
 	this->!Waifu2xConverter();
 }
 
+/// <summary>
+/// <c>Waifu2xConverter</c>クラスのファイナライザです。
+/// </summary>
 Waifu2xConverter::!Waifu2xConverter()
 {
 	w2xconv_fini(converter);
 }
-
 
 void Waifu2xConverter::ConvertFileHelper::ConvertFile()
 {
@@ -80,15 +93,32 @@ void Waifu2xConverter::ConvertFileHelper::ConvertFile()
 	}
 }
 
-Task ^ Waifu2xConverter::ConvertFileAsync(String^ sourcePath, String^ distinationPath, DenoiseLevel denoiseLevel, double scale)
+/// <summary>
+/// 入力ファイルおよび出力ファイルのパスを指定し、画像の拡大を非同期に行います。
+/// </summary>
+/// <param name="sourcePath">変換元画像のパス</param>
+/// <param name="destinationPath">変換後ファイルの保存先パス</param>
+/// <param name="denoiseLevel">ノイズ除去の強さ</param>
+/// <param name="scale">拡大率</param>
+/// <exception cref="System::IO::IOException"/>
+/// <exception cref="System::IO::FileLoadException"/>
+/// <exception cref="System::InvalidOperationException"/>
+Task ^ Waifu2xConverter::ConvertFileAsync(String^ sourcePath, String^ destinationPath, DenoiseLevel denoiseLevel, double scale)
 {
-	return ConvertFileAsync(sourcePath, distinationPath, denoiseLevel, scale, 0);
+	return ConvertFileAsync(sourcePath, destinationPath, denoiseLevel, scale, 0);
 }
 
-
-Task ^ Waifu2xConverter::ConvertFileAsync(String^ sourcePath, String^ distinationPath, DenoiseLevel denoiseLevel, double scale, int blockSize)
+/// <summary>
+/// 入力ファイルおよび出力ファイルのパスを指定し、画像の拡大を非同期に行います。
+/// </summary>
+/// <param name="sourcePath">変換元画像のパス</param>
+/// <param name="destinationPath">変換後ファイルの保存先パス</param>
+/// <param name="denoiseLevel">ノイズ除去の強さ</param>
+/// <param name="scale">拡大率</param>
+/// <param name="blockSize">変換時のブロックサイズ</param>
+Task ^ Waifu2xConverter::ConvertFileAsync(String^ sourcePath, String^ destinationPath, DenoiseLevel denoiseLevel, double scale, int blockSize)
 {
-	auto helper = gcnew Waifu2xConverter::ConvertFileHelper(converter, sourcePath, distinationPath, denoiseLevel, scale, blockSize);
+	auto helper = gcnew Waifu2xConverter::ConvertFileHelper(converter, sourcePath, destinationPath, denoiseLevel, scale, blockSize);
 	return Task::Run(gcnew Action(helper, &Waifu2xConverter::ConvertFileHelper::ConvertFile));
 }
 
@@ -110,11 +140,26 @@ WriteableBitmap^ Waifu2xConverter::ConvertHelper::Convert()
 	return resultBGR24;
 }
 
+/// <summary>
+/// 変換元画像を指定し、画像の拡大を非同期に行います。
+/// </summary>
+/// <param name="source">変換元画像のパス</param>
+/// <param name="denoiseLevel">ノイズ除去の強さ</param>
+/// <param name="scale">拡大率</param>
+/// <returns>変換後の画像</returns>
 Task<WriteableBitmap^>^ Waifu2xConverter::ConvertAsync(BitmapSource^ source, DenoiseLevel denoiseLevel, double scale)
 {
 	return ConvertAsync(source, denoiseLevel, scale, 0);
 }
 
+/// <summary>
+/// 変換元画像を指定し、画像の拡大を非同期に行います。
+/// </summary>
+/// <param name="source">変換元画像のパス</param>
+/// <param name="denoiseLevel">ノイズ除去の強さ</param>
+/// <param name="scale">拡大率</param>
+/// <param name="blockSize">変換時のブロックサイズ</param>
+/// <returns>変換後の画像</returns>
 Task<WriteableBitmap^>^ Waifu2xConverter::ConvertAsync(BitmapSource^ source, DenoiseLevel denoiseLevel, double scale, int blockSize)
 {
 	auto helper = gcnew Waifu2xConverter::ConvertHelper(converter, source, denoiseLevel, scale, blockSize);
