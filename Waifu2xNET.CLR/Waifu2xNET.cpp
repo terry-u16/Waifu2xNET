@@ -20,7 +20,24 @@ using namespace Waifu2xNET::CLR;
 /// <exception cref="System::InvalidOperationException"/>
 Waifu2xConverter::Waifu2xConverter(GpuMode gpuMode, ConvertModel model)
 {
-	converter = w2xconv_init(gpuMode == GpuMode::Auto ? W2XCONV_GPU_AUTO : W2XCONV_GPU_DISABLE, 0, 0);
+	W2XConvGPUMode nativeGPUMode;
+
+	switch (gpuMode)
+	{
+	case Waifu2xNET::CLR::GpuMode::Auto:
+		nativeGPUMode = W2XCONV_GPU_AUTO;
+		break;
+	case Waifu2xNET::CLR::GpuMode::ForceOpenCL:
+		nativeGPUMode = W2XCONV_GPU_FORCE_OPENCL;
+		break;
+	case Waifu2xNET::CLR::GpuMode::Disable:
+		nativeGPUMode = W2XCONV_GPU_DISABLE;
+		break;
+	default:
+		break;
+	}
+
+	converter = w2xconv_init(nativeGPUMode, 0, 0);
 	convertModel = model;
 
 	char* modelPath;
@@ -45,6 +62,9 @@ Waifu2xConverter::Waifu2xConverter(GpuMode gpuMode, ConvertModel model)
 		case W2XCONV_ERROR_MODEL_LOAD_FAILED:
 			path = marshal_as<String^>(converter->last_error.u.path);
 			throw gcnew IO::FileLoadException(String::Format("モデルファイルの読み込みエラーが発生しました。 Path:{0}", path), path);
+		case W2XCONV_ERROR_OPENCL:
+			throw gcnew InvalidOperationException(String::Format("OpenCLのエラーが発生しました。 Error code:{0}, Dev ID:{1}",
+				converter->last_error.u.cl_error.error_code, converter->last_error.u.cl_error.dev_id));
 		default:
 			throw gcnew InvalidOperationException(String::Format("不明なエラーが発生しました。 W2XConvErrorCode:{0}", (int)converter->last_error.code));
 		}
@@ -87,6 +107,9 @@ void Waifu2xConverter::ConvertFileHelper::ConvertFile()
 		case W2XCONV_ERROR_IMWRITE_FAILED:
 			path = marshal_as<String^>(converter->last_error.u.path);
 			throw gcnew IO::IOException(String::Format("ファイルの書き込みエラーが発生しました。 Path:{0}", path));
+		case W2XCONV_ERROR_OPENCL:
+			throw gcnew InvalidOperationException(String::Format("OpenCLのエラーが発生しました。 Error code:{0}, Dev ID:{1}", 
+				converter->last_error.u.cl_error.error_code, converter->last_error.u.cl_error.dev_id));
 		default:
 			throw gcnew InvalidOperationException(String::Format("不明なエラーが発生しました。 W2XConvErrorCode:{0}", (int)converter->last_error.code));
 		}
@@ -131,8 +154,21 @@ WriteableBitmap^ Waifu2xConverter::ConvertHelper::Convert()
 	pin_ptr<Byte> sourceBytes = (Byte*)sourceBGR24->BackBuffer.ToPointer();
 	pin_ptr<Byte> resultBytes = (Byte*)resultBGR24->BackBuffer.ToPointer();
 
-	w2xconv_convert_rgb(converter, resultBytes, resultBGR24->BackBufferStride, sourceBytes, sourceBGR24->BackBufferStride,
+	auto result = w2xconv_convert_rgb(converter, resultBytes, resultBGR24->BackBufferStride, sourceBytes, sourceBGR24->BackBufferStride,
 		source->PixelWidth, source->PixelHeight, (int)denoiseLevel, scale, blockSize);
+
+	if (result < 0)
+	{
+		switch (converter->last_error.code)
+		{
+		case W2XCONV_ERROR_OPENCL:
+			throw gcnew InvalidOperationException(String::Format("OpenCLのエラーが発生しました。 Error code:{0}, Dev ID:{1}", 
+				converter->last_error.u.cl_error.error_code, converter->last_error.u.cl_error.dev_id));
+		default:
+			throw gcnew InvalidOperationException(String::Format("不明なエラーが発生しました。 W2XConvErrorCode:{0}", (int)converter->last_error.code));
+		}
+	}
+
 	resultBGR24->AddDirtyRect(System::Windows::Int32Rect(0, 0, resultBGR24->PixelWidth, resultBGR24->PixelHeight));
 	resultBGR24->Unlock();
 	resultBGR24->Freeze();

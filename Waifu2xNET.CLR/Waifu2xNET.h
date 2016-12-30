@@ -13,9 +13,13 @@ namespace Waifu2xNET {
 		public enum class GpuMode
 		{
 			/// <summary>
-			/// GPUの使用モードを自動で判別します。
+			/// GPUの使用モードを自動で判別します。（推奨）
 			/// </summary>
 			Auto,
+			/// <summary>
+			/// OpenCLを使用して変換を行います。
+			/// </summary>
+			ForceOpenCL,
 			/// <summary>
 			/// GPUを使用せず、CPUのみで変換を行います。
 			/// </summary>
