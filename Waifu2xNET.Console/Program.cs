@@ -36,9 +36,10 @@ namespace Waifu2xNET.Console
 
                 foreach (var path in pathList)
                 {
-                    System.Console.WriteLine($"Converting... : {path}");
+                    var stopwatch = new System.Diagnostics.Stopwatch();
+                    stopwatch.Start();
 
-                    System.Console.WriteLine(System.IO.Directory.GetCurrentDirectory());
+                    System.Console.WriteLine($"Converting... : {path}");
 
                     var newFilePath = GetNewFilePath(path);
                     var source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
@@ -54,6 +55,10 @@ namespace Waifu2xNET.Console
                     }
 
                     System.Console.WriteLine($"Converted : {newFilePath}");
+
+                    stopwatch.Stop();
+                    System.Console.WriteLine($"Elasped time : {stopwatch.Elapsed}");
+
                 }
 
                 System.Console.WriteLine("Completed.");
