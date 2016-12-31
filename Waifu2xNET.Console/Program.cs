@@ -46,7 +46,7 @@ namespace Waifu2xNET.Console
                     source.Freeze();
 
                     var result = await converter.ConvertAsync(source, DenoiseLevel.Level1, 2.0);
-
+                    
                     using (var writer = new FileStream(newFilePath, FileMode.Create))
                     {
                         var encoder = new PngBitmapEncoder();

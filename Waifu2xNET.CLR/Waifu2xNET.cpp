@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "Waifu2xNET.h"
+#include "ImageHelper.h"
 
 using namespace System::Threading::Tasks;
 using namespace System::Drawing;
@@ -131,10 +132,19 @@ Task ^ Waifu2xConverter::ConvertFileAsync(String^ sourcePath, String^ destinatio
 	return Task::Run(gcnew Action(helper, &Waifu2xConverter::ConvertFileHelper::ConvertFile));
 }
 
+
 WriteableBitmap^ Waifu2xConverter::ConvertHelper::Convert()
 {
-	auto sourceBGR24 = gcnew WriteableBitmap(gcnew FormatConvertedBitmap(source, System::Windows::Media::PixelFormats::Bgr24, nullptr, 0));
+	auto sourceBGR24 = gcnew WriteableBitmap(gcnew FormatConvertedBitmap(source, PixelFormats::Bgr24, nullptr, 100));
 	auto resultBGR24 = gcnew WriteableBitmap((int)(source->PixelWidth * scale), (int)(source->PixelHeight * scale), source->DpiX, source->DpiY, PixelFormats::Bgr24, nullptr);
+
+	WriteableBitmap^ resultAlpha;
+	bool hasAlpha = HasAlphaChannel(source);
+
+	if (hasAlpha)
+	{
+		resultAlpha = ResizeBicubicAlpha(GetAlphaChannel(source), scale);
+	}
 
 	resultBGR24->Lock();
 	pin_ptr<Byte> sourceBytes = (Byte*)sourceBGR24->BackBuffer.ToPointer();
@@ -159,7 +169,14 @@ WriteableBitmap^ Waifu2xConverter::ConvertHelper::Convert()
 	resultBGR24->Unlock();
 	resultBGR24->Freeze();
 
-	return resultBGR24;
+	if (hasAlpha)
+	{
+		return ComposeAlpha(resultBGR24, resultAlpha);
+	}
+	else
+	{
+		return resultBGR24;
+	}
 }
 
 /// <summary>
