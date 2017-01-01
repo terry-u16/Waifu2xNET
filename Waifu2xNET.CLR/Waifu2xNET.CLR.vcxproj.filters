@@ -15,16 +15,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Waifu2xNET.h">
+    <ClInclude Include="ImageHelper.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="resource.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Stdafx.h">
+    <ClInclude Include="Stdafx.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="ImageHelper.h">
+    <ClInclude Include="Waifu2xNET.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

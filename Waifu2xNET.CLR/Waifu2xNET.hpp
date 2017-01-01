@@ -1,4 +1,4 @@
-// Waifu2xNET.h
+// Waifu2xNET.hpp
 
 #pragma once
 

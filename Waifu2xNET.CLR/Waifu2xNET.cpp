@@ -1,8 +1,8 @@
 // これは メイン DLL ファイルです。
 
-#include "stdafx.h"
-#include "Waifu2xNET.h"
-#include "ImageHelper.h"
+#include "stdafx.hpp"
+#include "Waifu2xNET.hpp"
+#include "ImageHelper.hpp"
 
 using namespace System::Threading::Tasks;
 using namespace System::Drawing;

@@ -1,5 +1,5 @@
-#include "stdafx.h"
-#include "ImageHelper.h"
+#include "stdafx.hpp"
+#include "ImageHelper.hpp"
 
 using namespace System;
 using namespace System::Windows::Media;
