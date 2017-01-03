@@ -54,6 +54,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -81,7 +84,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(SolutionDir)\waifu2x-converter-cpp\$(PlatformName)\w2xc.dll" "$(TargetDir)"
+    <PostBuildEvent>copy "$(SolutionDir)\waifu2x-converter-cpp\dll_$(PlatformName)\w2xc.dll" "$(TargetDir)"
 xcopy "$(SolutionDir)\waifu2x-converter-cpp\models" "$(TargetDir)models\" /Y
 xcopy "$(SolutionDir)\waifu2x-converter-cpp\models_rgb" "$(TargetDir)models_rgb\" /Y</PostBuildEvent>
   </PropertyGroup>
