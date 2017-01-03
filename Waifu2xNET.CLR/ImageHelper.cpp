@@ -22,7 +22,7 @@ WriteableBitmap ^ Waifu2xNET::CLR::GetAlphaChannel(BitmapSource ^ image)
 	auto sourcePixels = (UInt32*)imageBgra32->BackBuffer.ToPointer();
 	auto alphaPixels = (Byte*)alphaChannel->BackBuffer.ToPointer();
 
-	for (size_t i = 0; i < pixelLength; i++)
+	for (int i = 0; i < pixelLength; i++)
 	{
 		UInt32 color = sourcePixels[i];
 		auto alpha = (Byte)((color >> 24) & 0xff);
@@ -66,9 +66,9 @@ WriteableBitmap^ Waifu2xNET::CLR::ResizeBicubicAlpha(WriteableBitmap^ source, do
 	auto sourceBackBuffer = (Byte*)source->BackBuffer.ToPointer();
 	auto resultBackBuffer = (Byte*)result->BackBuffer.ToPointer();
 
-	for (size_t iy = 0; iy < result->PixelHeight; iy++)
+	for (int iy = 0; iy < result->PixelHeight; iy++)
 	{
-		for (size_t ix = 0; ix < result->PixelWidth; ix++)
+		for (int ix = 0; ix < result->PixelWidth; ix++)
 		{
 			// Œ³‰æ‘œ‚É‚¨‚¯‚é‘Î‰žÀ•W
 			double xf = ix * invScale;
@@ -115,7 +115,7 @@ WriteableBitmap^ Waifu2xNET::CLR::ComposeAlpha(WriteableBitmap^ bgr24, Writeable
 	auto alpha8BackBuffer = (Byte*)alpha8->BackBuffer.ToPointer();
 	auto resultBackBuffer = (UInt32*)result->BackBuffer.ToPointer();
 
-	for (size_t i = 0; i < size; i++)
+	for (int i = 0; i < size; i++)
 	{
 		Byte b = bgr24BackBuffer[3 * i];
 		Byte g = bgr24BackBuffer[3 * i + 1];
