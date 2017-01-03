@@ -13,6 +13,9 @@
     <ClCompile Include="Waifu2xNET.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Processor.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageHelper.hpp">
@@ -25,6 +28,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Waifu2xNET.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Processor.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

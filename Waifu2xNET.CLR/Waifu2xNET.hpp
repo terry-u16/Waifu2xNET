@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "Processor.hpp"
+
 using namespace System;
 
 namespace Waifu2xNET {
@@ -63,8 +65,10 @@ namespace Waifu2xNET {
 				double scale;
 				int blockSize;
 			public:
-				ConvertFileHelper(W2XConv* converter, String^ sourcePath, String^ destinationPath, DenoiseLevel denoiseLevel, double scale, int blockSize)
-					: converter(converter), sourcePath(sourcePath), distinationPath(destinationPath), denoiseLevel(denoiseLevel), scale(scale), blockSize(blockSize) {}
+				ConvertFileHelper(W2XConv* converter, String^ sourcePath, String^ destinationPath,
+					DenoiseLevel denoiseLevel, double scale, int blockSize)
+					: converter(converter), sourcePath(sourcePath), distinationPath(destinationPath),
+					denoiseLevel(denoiseLevel), scale(scale), blockSize(blockSize) {}
 				void ConvertFile();
 			};
 
@@ -77,10 +81,11 @@ namespace Waifu2xNET {
 				double scale;
 				int blockSize;
 			public:
-				ConvertHelper(W2XConv* converter, System::Windows::Media::Imaging::BitmapSource^ source, DenoiseLevel denoiseLevel, double scale, int blockSize)
-					: converter(converter), source(source), denoiseLevel(denoiseLevel), scale(scale), blockSize(blockSize) {}
+				ConvertHelper(W2XConv* converter, System::Windows::Media::Imaging::BitmapSource^ source,
+					DenoiseLevel denoiseLevel, double scale, int blockSize)
+					: converter(converter), source(source), denoiseLevel(denoiseLevel), scale(scale),
+					blockSize(blockSize) {}
 				System::Windows::Media::Imaging::WriteableBitmap^ Convert();
-
 			};
 
 		public:
@@ -88,11 +93,28 @@ namespace Waifu2xNET {
 			~Waifu2xConverter();
 			!Waifu2xConverter();
 
+			/// <summary>
+			/// 変換に用いるプロセッサーの一覧です。
+			/// </summary>
+			static property System::Collections::Generic::IReadOnlyList<Processor^>^ Processors
+			{
+				System::Collections::Generic::IReadOnlyList<Processor^>^ get()
+				{
+					int ret_num;
+					auto nativeDeviceList = w2xconv_get_processor_list(&ret_num);
+					auto devices = gcnew array<Processor^>(ret_num);
+					for (int i = 0; i < ret_num; i++)
+					{
+						devices[i] = gcnew Processor(&nativeDeviceList[i]);
+					}
+					return array<Processor^>::AsReadOnly(devices);
+				}
+			}
+
 			System::Threading::Tasks::Task^ ConvertFileAsync(String^ sourcePath, String^ destinationPath, DenoiseLevel denoiseLevel, double scale);
 			System::Threading::Tasks::Task^ ConvertFileAsync(String^ sourcePath, String^ destinationPath, DenoiseLevel denoiseLevel, double scale, int blockSize);
 			System::Threading::Tasks::Task<System::Windows::Media::Imaging::WriteableBitmap^>^ ConvertAsync(System::Windows::Media::Imaging::BitmapSource^ source, DenoiseLevel denoiseLevel, double scale);
 			System::Threading::Tasks::Task<System::Windows::Media::Imaging::WriteableBitmap^>^ ConvertAsync(System::Windows::Media::Imaging::BitmapSource^ source, DenoiseLevel denoiseLevel, double scale, int blockSize);
 		};
-
 	}
 }

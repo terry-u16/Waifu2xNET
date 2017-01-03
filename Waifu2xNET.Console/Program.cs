@@ -25,12 +25,12 @@ namespace Waifu2xNET.Console
 
             System.Console.WriteLine("Press any key...");
             System.Console.ReadKey();
-
         }
 
         static async Task ConvertInMemory(string[] pathList)
         {
-            using (var converter = new Waifu2xConverter(GpuMode.Auto))
+                DisplayDeviceInfo();
+            using (var converter = new Waifu2xConverter(GpuMode.Disable))
             {
                 System.Console.WriteLine("Initialized.");
 
@@ -45,7 +45,7 @@ namespace Waifu2xNET.Console
                     var source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
                     source.Freeze();
 
-                    var result = await converter.ConvertAsync(source, DenoiseLevel.Level1, 2.0);
+                    var result = await converter.ConvertAsync(source, DenoiseLevel.Level1, 2.0, 0);
                     
                     using (var writer = new FileStream(newFilePath, FileMode.Create))
                     {
@@ -58,7 +58,6 @@ namespace Waifu2xNET.Console
 
                     stopwatch.Stop();
                     System.Console.WriteLine($"Elasped time : {stopwatch.Elapsed}");
-
                 }
 
                 System.Console.WriteLine("Completed.");
@@ -87,6 +86,19 @@ namespace Waifu2xNET.Console
             var directory = Path.GetDirectoryName(path);
             var filename = Path.GetFileName(path);
             return Path.Combine(directory, $"Waifu2xNET_{filename}").ToString();
+        }
+
+        static void DisplayDeviceInfo()
+        {
+            foreach (var processor in Waifu2xConverter.Processors)
+            {
+                System.Console.WriteLine($"[{processor.DeviceName}]");
+                System.Console.WriteLine($"DeviceID : {processor.DeviceID}");
+                System.Console.WriteLine($"ProcessorType : {processor.ProcessorType}");
+                System.Console.WriteLine($"NumberOfCores : {processor.NumberOfCores}");
+                System.Console.WriteLine($"SubType : {processor.ProcessorSubType}");
+                System.Console.WriteLine();
+            }
         }
     }
 }
