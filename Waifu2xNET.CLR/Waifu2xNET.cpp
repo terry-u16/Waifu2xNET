@@ -8,6 +8,7 @@ using namespace System::Threading::Tasks;
 using namespace System::Drawing;
 using namespace System::Windows::Media;
 using namespace System::Windows::Media::Imaging;
+using namespace Runtime::InteropServices;
 using namespace msclr::interop;
 using namespace Waifu2xNET::CLR;
 
@@ -78,9 +79,9 @@ void Waifu2xConverter::ConvertFileHelper::ConvertFile()
 {
 	marshal_context marshalContext;
 
-	auto result = w2xconv_convert_file(converter, 
-		marshalContext.marshal_as<const char*>(distinationPath), 
-		marshalContext.marshal_as<const char*>(sourcePath), 
+	auto result = w2xconv_convert_file(converter,
+		marshalContext.marshal_as<const char*>(distinationPath),
+		marshalContext.marshal_as<const char*>(sourcePath),
 		(int)denoiseLevel, scale, blockSize);
 
 	if (result < 0)
@@ -95,7 +96,7 @@ void Waifu2xConverter::ConvertFileHelper::ConvertFile()
 			path = marshal_as<String^>(converter->last_error.u.path);
 			throw gcnew IO::IOException(String::Format("ファイルの書き込みエラーが発生しました。 Path:{0}", path));
 		case W2XCONV_ERROR_OPENCL:
-			throw gcnew InvalidOperationException(String::Format("OpenCLのエラーが発生しました。 Error code:{0}, Dev ID:{1}", 
+			throw gcnew InvalidOperationException(String::Format("OpenCLのエラーが発生しました。 Error code:{0}, Dev ID:{1}",
 				converter->last_error.u.cl_error.error_code, converter->last_error.u.cl_error.dev_id));
 		default:
 			throw gcnew InvalidOperationException(String::Format("不明なエラーが発生しました。 W2XConvErrorCode:{0}", (int)converter->last_error.code));
@@ -125,13 +126,15 @@ Task ^ Waifu2xConverter::ConvertFileAsync(String^ sourcePath, String^ destinatio
 /// <param name="destinationPath">変換後ファイルの保存先パス</param>
 /// <param name="denoiseLevel">ノイズ除去の強さ</param>
 /// <param name="scale">拡大率</param>
-/// <param name="blockSize">変換時のブロックサイズ</param>
+/// <param name="blockSize">変換時のブロックサイズ。0を渡すと自動で設定されます。</param>
+/// <exception cref="System::IO::IOException"/>
+/// <exception cref="System::IO::FileLoadException"/>
+/// <exception cref="System::InvalidOperationException"/>
 Task ^ Waifu2xConverter::ConvertFileAsync(String^ sourcePath, String^ destinationPath, DenoiseLevel denoiseLevel, double scale, int blockSize)
 {
 	auto helper = gcnew Waifu2xConverter::ConvertFileHelper(converter, sourcePath, destinationPath, denoiseLevel, scale, blockSize);
 	return Task::Run(gcnew Action(helper, &Waifu2xConverter::ConvertFileHelper::ConvertFile));
 }
-
 
 WriteableBitmap^ Waifu2xConverter::ConvertHelper::Convert()
 {
@@ -169,14 +172,7 @@ WriteableBitmap^ Waifu2xConverter::ConvertHelper::Convert()
 	resultBGR24->Unlock();
 	resultBGR24->Freeze();
 
-	if (hasAlpha)
-	{
-		return ComposeAlpha(resultBGR24, resultAlpha);
-	}
-	else
-	{
-		return resultBGR24;
-	}
+	return !hasAlpha ? resultBGR24 : ComposeAlpha(resultBGR24, resultAlpha);
 }
 
 /// <summary>
@@ -197,11 +193,10 @@ Task<WriteableBitmap^>^ Waifu2xConverter::ConvertAsync(BitmapSource^ source, Den
 /// <param name="source">変換元画像のパス</param>
 /// <param name="denoiseLevel">ノイズ除去の強さ</param>
 /// <param name="scale">拡大率</param>
-/// <param name="blockSize">変換時のブロックサイズ</param>
+/// <param name="blockSize">変換時のブロックサイズ。0を渡すと自動で設定されます。</param>
 /// <returns>変換後の画像</returns>
 Task<WriteableBitmap^>^ Waifu2xConverter::ConvertAsync(BitmapSource^ source, DenoiseLevel denoiseLevel, double scale, int blockSize)
 {
 	auto helper = gcnew Waifu2xConverter::ConvertHelper(converter, source, denoiseLevel, scale, blockSize);
 	return Task<WriteableBitmap^>::Run(gcnew Func<WriteableBitmap^>(helper, &Waifu2xConverter::ConvertHelper::Convert));
 }
-
