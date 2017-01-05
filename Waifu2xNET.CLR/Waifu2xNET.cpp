@@ -14,6 +14,7 @@ using namespace Waifu2xNET::CLR;
 
 /// <summary>
 /// 画像の拡大に用いる<c>Waifu2xConverter</c>クラスのインスタンスを生成します。
+/// このクラスはIDisposableを継承しているため、using句またはDisposeメソッドでリソースの解放が必要です。
 /// </summary>
 /// <param name="gpuMode">画像拡大時のGPU使用モード</param>
 /// <returns>Waifu2xConverterクラスのインスタンス</returns>
