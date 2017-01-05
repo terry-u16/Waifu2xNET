@@ -144,6 +144,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -153,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageHelper.hpp" />
+    <ClInclude Include="Model.hpp" />
     <ClInclude Include="Processor.hpp" />
     <ClInclude Include="resource.hpp" />
     <ClInclude Include="Stdafx.hpp" />
@@ -161,6 +165,7 @@
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="ImageHelper.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Processor.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -178,6 +183,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

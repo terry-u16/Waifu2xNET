@@ -54,6 +54,7 @@ namespace Waifu2xNET {
 		{
 		private:
 			W2XConv* converter;
+			void LoadModel();
 
 			ref class ConvertFileHelper
 			{

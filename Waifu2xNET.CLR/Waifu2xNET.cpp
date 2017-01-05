@@ -3,6 +3,7 @@
 #include "stdafx.hpp"
 #include "Waifu2xNET.hpp"
 #include "ImageHelper.hpp"
+#include "Model.hpp"
 
 using namespace System::Threading::Tasks;
 using namespace System::Drawing;
@@ -11,6 +12,29 @@ using namespace System::Windows::Media::Imaging;
 using namespace Runtime::InteropServices;
 using namespace msclr::interop;
 using namespace Waifu2xNET::CLR;
+using namespace Newtonsoft::Json;
+
+void Waifu2xNET::CLR::Waifu2xConverter::LoadModel()
+{
+	auto modelNames = gcnew cli::array<String^> { "scale2.0x_model.json", "noise1_model.json", "noise2_model.json" };
+	auto filterTypes = gcnew cli::array<W2XConvFilterType> { W2XConvFilterType::W2XCONV_FILTER_SCALE2x, W2XConvFilterType::W2XCONV_FILTER_DENOISE1, W2XConvFilterType::W2XCONV_FILTER_DENOISE2 };
+	Console::WriteLine("Loading JSON...");
+
+	for (int i = 0; i < modelNames->Length; i++)
+	{
+		auto reader = gcnew System::IO::StreamReader(".//models_rgb//" + modelNames[i]);
+		auto model = Model::CreateFromJSON(reader->ReadToEnd());
+
+		pin_ptr<int> numberOfPlanes = &model->NumberOfPlanesList[0];
+		pin_ptr<float> biasList = &model->BiasList[0];
+		pin_ptr<float> weightList = &model->WeightList[0];
+
+
+		w2xconv_set_model_3x3(converter, filterTypes[i],
+			model->LayerDepth, model->NumberOfFirstInputPlane, numberOfPlanes, weightList, biasList);
+	}
+	Console::WriteLine("Loaded.");
+}
 
 /// <summary>
 /// 画像の拡大に用いる<c>Waifu2xConverter</c>クラスのインスタンスを生成します。

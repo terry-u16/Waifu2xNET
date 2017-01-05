@@ -16,6 +16,9 @@
     <ClCompile Include="Processor.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageHelper.hpp">
@@ -31,6 +34,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Processor.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -57,5 +63,8 @@
     <Image Include="app.ico">
       <Filter>Resources</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
