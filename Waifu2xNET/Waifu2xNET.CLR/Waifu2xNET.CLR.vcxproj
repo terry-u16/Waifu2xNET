@@ -103,8 +103,8 @@
     </Link>
     <PostBuildEvent>
       <Command>mkdir  "$(OutputPath)ja
-"$(SolutionDir)XmlCommentFilter\bin\$(PlatformTarget)\$(ConfigurationName)\XmlCommentFilter.exe" "$(OutputPath)Waifu2xNET.CLR.xml" ja &gt; "$(OutputPath)ja\Waifu2xNET.CLR.xml"
-"$(SolutionDir)XmlCommentFilter\bin\$(PlatformTarget)\$(ConfigurationName)\XmlCommentFilter.exe" "$(OutputPath)Waifu2xNET.CLR.xml" &gt; "$(OutputPath)Waifu2xNET.CLR_en.xml"
+"$(SolutionDir)Tools\XmlCommentFilter\bin\$(PlatformTarget)\$(ConfigurationName)\XmlCommentFilter.exe" "$(OutputPath)Waifu2xNET.CLR.xml" ja &gt; "$(OutputPath)ja\Waifu2xNET.CLR.xml"
+"$(SolutionDir)Tools\XmlCommentFilter\bin\$(PlatformTarget)\$(ConfigurationName)\XmlCommentFilter.exe" "$(OutputPath)Waifu2xNET.CLR.xml" &gt; "$(OutputPath)Waifu2xNET.CLR_en.xml"
 move /Y "$(OutputPath)Waifu2xNET.CLR_en.xml" "$(OutputPath)Waifu2xNET.CLR.xml"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -124,8 +124,8 @@ move /Y "$(OutputPath)Waifu2xNET.CLR_en.xml" "$(OutputPath)Waifu2xNET.CLR.xml"</
     </Link>
     <PostBuildEvent>
       <Command>mkdir  "$(OutputPath)ja
-"$(SolutionDir)XmlCommentFilter\bin\$(PlatformTarget)\$(ConfigurationName)\XmlCommentFilter.exe" "$(OutputPath)Waifu2xNET.CLR.xml" ja &gt; "$(OutputPath)ja\Waifu2xNET.CLR.xml"
-"$(SolutionDir)XmlCommentFilter\bin\$(PlatformTarget)\$(ConfigurationName)\XmlCommentFilter.exe" "$(OutputPath)Waifu2xNET.CLR.xml" &gt; "$(OutputPath)Waifu2xNET.CLR_en.xml"
+"$(SolutionDir)Tools\XmlCommentFilter\bin\$(PlatformTarget)\$(ConfigurationName)\XmlCommentFilter.exe" "$(OutputPath)Waifu2xNET.CLR.xml" ja &gt; "$(OutputPath)ja\Waifu2xNET.CLR.xml"
+"$(SolutionDir)Tools\XmlCommentFilter\bin\$(PlatformTarget)\$(ConfigurationName)\XmlCommentFilter.exe" "$(OutputPath)Waifu2xNET.CLR.xml" &gt; "$(OutputPath)Waifu2xNET.CLR_en.xml"
 move /Y "$(OutputPath)Waifu2xNET.CLR_en.xml" "$(OutputPath)Waifu2xNET.CLR.xml"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

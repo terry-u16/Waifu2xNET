@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Waifu2xNET.CLR", "Waifu2xNET.CLR\Waifu2xNET.CLR.vcxproj", "{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Waifu2xNET.CLR", "Waifu2xNET\Waifu2xNET.CLR\Waifu2xNET.CLR.vcxproj", "{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BED97B8B-9411-455A-B104-5D340EB86F02} = {BED97B8B-9411-455A-B104-5D340EB86F02}
 	EndProjectSection
@@ -39,38 +39,54 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "models", "models", "{176205
 		waifu2x-converter-cpp\models\scale2.0x_model.json = waifu2x-converter-cpp\models\scale2.0x_model.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waifu2xNET.Console", "Waifu2xNET.Console\Waifu2xNET.Console.csproj", "{B3F0979F-7D53-4941-BB93-007ABE596B11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waifu2xNET.Console", "Samples\Waifu2xNET.Console\Waifu2xNET.Console.csproj", "{B3F0979F-7D53-4941-BB93-007ABE596B11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlCommentFilter", "XmlCommentFilter\XmlCommentFilter.csproj", "{BED97B8B-9411-455A-B104-5D340EB86F02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlCommentFilter", "Tools\XmlCommentFilter\XmlCommentFilter.csproj", "{BED97B8B-9411-455A-B104-5D340EB86F02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{7DE981A3-D665-4BD9-8A8A-8D0B67073280}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{8AB13BCC-0506-4BB1-8D56-F0C21826CD76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Waifu2xNET", "Waifu2xNET", "{8C3018B0-05FC-425F-B7AE-5E0E92551F95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Debug|x64.ActiveCfg = Debug|x64
 		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Debug|x64.Build.0 = Debug|x64
 		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Debug|x86.ActiveCfg = Debug|Win32
 		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Debug|x86.Build.0 = Debug|Win32
+		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Release|Any CPU.ActiveCfg = Release|Win32
 		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Release|x64.ActiveCfg = Release|x64
 		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Release|x64.Build.0 = Release|x64
 		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Release|x86.ActiveCfg = Release|Win32
 		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}.Release|x86.Build.0 = Release|Win32
+		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Debug|x64.ActiveCfg = Debug|x64
 		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Debug|x64.Build.0 = Debug|x64
 		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Debug|x86.ActiveCfg = Debug|x86
 		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Debug|x86.Build.0 = Debug|x86
+		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|Any CPU.ActiveCfg = Release|x86
 		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|x64.ActiveCfg = Release|x64
 		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|x64.Build.0 = Release|x64
 		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|x86.ActiveCfg = Release|x86
 		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|x86.Build.0 = Release|x86
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BED97B8B-9411-455A-B104-5D340EB86F02}.Debug|x64.ActiveCfg = Debug|x64
 		{BED97B8B-9411-455A-B104-5D340EB86F02}.Debug|x64.Build.0 = Debug|x64
 		{BED97B8B-9411-455A-B104-5D340EB86F02}.Debug|x86.ActiveCfg = Debug|x86
 		{BED97B8B-9411-455A-B104-5D340EB86F02}.Debug|x86.Build.0 = Debug|x86
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BED97B8B-9411-455A-B104-5D340EB86F02}.Release|x64.ActiveCfg = Release|Any CPU
 		{BED97B8B-9411-455A-B104-5D340EB86F02}.Release|x64.Build.0 = Release|Any CPU
 		{BED97B8B-9411-455A-B104-5D340EB86F02}.Release|x86.ActiveCfg = Release|Any CPU
@@ -80,9 +96,12 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{FDF28C57-AFA6-4084-A9B6-939B76DF41DA} = {8C3018B0-05FC-425F-B7AE-5E0E92551F95}
 		{1C46CA0C-F324-4227-8185-6DA420C92DCC} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
 		{FC885081-A76E-409F-B58C-2201EFB6D5FB} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
 		{27E68D02-57FA-40E7-B2CB-B08953AF1026} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
 		{176205E0-FB25-40E4-BBE6-25607F4DC1D2} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
+		{B3F0979F-7D53-4941-BB93-007ABE596B11} = {7DE981A3-D665-4BD9-8A8A-8D0B67073280}
+		{BED97B8B-9411-455A-B104-5D340EB86F02} = {8AB13BCC-0506-4BB1-8D56-F0C21826CD76}
 	EndGlobalSection
 EndGlobal

@@ -77,7 +77,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Waifu2xNET.CLR\Waifu2xNET.CLR.vcxproj">
+    <ProjectReference Include="..\..\Waifu2xNET\Waifu2xNET.CLR\Waifu2xNET.CLR.vcxproj">
       <Project>{fdf28c57-afa6-4084-a9b6-939b76df41da}</Project>
       <Name>Waifu2xNET.CLR</Name>
     </ProjectReference>
