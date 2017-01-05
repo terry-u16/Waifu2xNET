@@ -13,11 +13,18 @@ using namespace msclr::interop;
 using namespace Waifu2xNET::CLR;
 
 /// <summary>
-/// 画像の拡大に用いる<c>Waifu2xConverter</c>クラスのインスタンスを生成します。
-/// このクラスはIDisposableを継承しているため、using句またはDisposeメソッドでリソースの解放が必要です。
+/// Create an instance of <c>Waifu2xConverter</c> class for resize pictures.
+/// This class implements <c>IDisposable</c> and so it is needed to release unmanaged resources by 
+/// <c>using</c> statement or <c>Dispose</c> method.
 /// </summary>
-/// <param name="gpuMode">画像拡大時のGPU使用モード</param>
-/// <returns>Waifu2xConverterクラスのインスタンス</returns>
+/// <param name="gpuMode">GPU/CPU selection mode. (GpuMode.Auto is preferred)</param>
+/// <returns>An instance of <c>Waifu2xConverter</c> class.</returns>
+/// <summary xml:lang="ja">
+/// 画像の拡大に用いる<c>Waifu2xConverter</c>クラスのインスタンスを生成します。
+/// このクラスは<c>IDisposable</c>を継承しているため、<c>using</c>句または<c>Dispose</c>メソッドでリソースの解放が必要です。
+/// </summary>
+/// <param name="gpuMode" xml:lang="ja">画像拡大時のGPU使用モード（推奨値はGpuMode.Autoです）</param>
+/// <returns xml:lang="ja">Waifu2xConverterクラスのインスタンス</returns>
 /// <exception cref="System::IO::FileLoadException"/>
 /// <exception cref="System::InvalidOperationException"/>
 Waifu2xConverter::Waifu2xConverter(GpuMode gpuMode)
@@ -61,6 +68,9 @@ Waifu2xConverter::Waifu2xConverter(GpuMode gpuMode)
 }
 
 /// <summary>
+/// Release unmanaged resources of <c>Waifu2xConverter</c> class.
+/// </summary>
+/// <summary xml:lang="ja">
 /// <c>Waifu2xConverter</c>クラスの持つアンマネージドリソースの解放を行います。
 /// </summary>
 Waifu2xConverter::~Waifu2xConverter()
@@ -69,6 +79,9 @@ Waifu2xConverter::~Waifu2xConverter()
 }
 
 /// <summary>
+/// The finalizer of <c>Waifu2xConverter</c> class.
+/// </summary>
+/// <summary xml:lang="ja">
 /// <c>Waifu2xConverter</c>クラスのファイナライザです。
 /// </summary>
 Waifu2xConverter::!Waifu2xConverter()
@@ -106,12 +119,19 @@ void Waifu2xConverter::ConvertFileHelper::ConvertFile()
 }
 
 /// <summary>
+/// Designate input/output file path and resize a picture asynchronously.
+/// </summary>
+/// <param name="sourcePath">Path of the source picture</param>
+/// <param name="destinationPath">Path of the output pucture</param>
+/// <param name="denoiseLevel">Level of denoise filter</param>
+/// <param name="scale">Scaling ratio (>= 1)</param>
+/// <summary xml:lang="ja">
 /// 入力ファイルおよび出力ファイルのパスを指定し、画像の拡大を非同期に行います。
 /// </summary>
-/// <param name="sourcePath">変換元画像のパス</param>
-/// <param name="destinationPath">変換後ファイルの保存先パス</param>
-/// <param name="denoiseLevel">ノイズ除去の強さ</param>
-/// <param name="scale">拡大率</param>
+/// <param name="sourcePath" xml:lang="ja">変換元画像のパス</param>
+/// <param name="destinationPath" xml:lang="ja">変換後ファイルの保存先パス</param>
+/// <param name="denoiseLevel" xml:lang="ja">ノイズ除去の強さ</param>
+/// <param name="scale" xml:lang="ja">拡大率（1以上）</param>
 /// <exception cref="System::IO::IOException"/>
 /// <exception cref="System::IO::FileLoadException"/>
 /// <exception cref="System::InvalidOperationException"/>
@@ -121,13 +141,21 @@ Task ^ Waifu2xConverter::ConvertFileAsync(String^ sourcePath, String^ destinatio
 }
 
 /// <summary>
+/// Designate input/output file path and resize a picture asynchronously.
+/// </summary>
+/// <param name="sourcePath">Path of the source picture</param>
+/// <param name="destinationPath">Path of the output pucture</param>
+/// <param name="denoiseLevel">Level of denoise filter</param>
+/// <param name="scale">Scaling ratio (>= 1)</param>
+/// <param name="blockSize">Block size of conversion. It is selected automatically when 0 is passed.</param>
+/// <summary xml:lang="ja">
 /// 入力ファイルおよび出力ファイルのパスを指定し、画像の拡大を非同期に行います。
 /// </summary>
-/// <param name="sourcePath">変換元画像のパス</param>
-/// <param name="destinationPath">変換後ファイルの保存先パス</param>
-/// <param name="denoiseLevel">ノイズ除去の強さ</param>
-/// <param name="scale">拡大率</param>
-/// <param name="blockSize">変換時のブロックサイズ。0を渡すと自動で設定されます。</param>
+/// <param name="sourcePath" xml:lang="ja">変換元画像のパス</param>
+/// <param name="destinationPath" xml:lang="ja">変換後ファイルの保存先パス</param>
+/// <param name="denoiseLevel" xml:lang="ja">ノイズ除去の強さ</param>
+/// <param name="scale" xml:lang="ja">拡大率（1以上）</param>
+/// <param name="blockSize" xml:lang="ja">変換時のブロックサイズ。0を渡すと自動で設定されます。</param>
 /// <exception cref="System::IO::IOException"/>
 /// <exception cref="System::IO::FileLoadException"/>
 /// <exception cref="System::InvalidOperationException"/>
@@ -177,25 +205,39 @@ WriteableBitmap^ Waifu2xConverter::ConvertHelper::Convert()
 }
 
 /// <summary>
+/// Designate a source picture and resize a picture asynchronously.
+/// </summary>
+/// <param name="source">Source picture</param>
+/// <param name="denoiseLevel">Level of denoise filter</param>
+/// <param name="scale">Scaling ratio (>= 1)</param>
+/// <returns>Resized picture</returns>
+/// <summary xml:lang="ja">
 /// 変換元画像を指定し、画像の拡大を非同期に行います。
 /// </summary>
-/// <param name="source">変換元画像のパス</param>
-/// <param name="denoiseLevel">ノイズ除去の強さ</param>
-/// <param name="scale">拡大率</param>
-/// <returns>変換後の画像</returns>
+/// <param name="source" xml:lang="ja">変換元画像</param>
+/// <param name="denoiseLevel" xml:lang="ja">ノイズ除去の強さ</param>
+/// <param name="scale" xml:lang="ja">拡大率（1以上）</param>
+/// <returns xml:lang="ja">変換後の画像</returns>
 Task<WriteableBitmap^>^ Waifu2xConverter::ConvertAsync(BitmapSource^ source, DenoiseLevel denoiseLevel, double scale)
 {
 	return ConvertAsync(source, denoiseLevel, scale, 0);
 }
 
 /// <summary>
+/// Designate a source picture and resize a picture asynchronously.
+/// </summary>
+/// <param name="source">Source picture</param>
+/// <param name="denoiseLevel">Level of denoise filter</param>
+/// <param name="scale">Scaling ratio (>= 1)</param>
+/// <returns>Resized picture</returns>
+/// <summary xml:lang="ja">
 /// 変換元画像を指定し、画像の拡大を非同期に行います。
 /// </summary>
-/// <param name="source">変換元画像のパス</param>
-/// <param name="denoiseLevel">ノイズ除去の強さ</param>
-/// <param name="scale">拡大率</param>
-/// <param name="blockSize">変換時のブロックサイズ。0を渡すと自動で設定されます。</param>
-/// <returns>変換後の画像</returns>
+/// <param name="source" xml:lang="ja">変換元画像</param>
+/// <param name="denoiseLevel" xml:lang="ja">ノイズ除去の強さ</param>
+/// <param name="scale" xml:lang="ja">拡大率（1以上）</param>
+/// <param name="blockSize" xml:lang="ja">変換時のブロックサイズ。0を渡すと自動で設定されます。</param>
+/// <returns xml:lang="ja">変換後の画像</returns>
 Task<WriteableBitmap^>^ Waifu2xConverter::ConvertAsync(BitmapSource^ source, DenoiseLevel denoiseLevel, double scale, int blockSize)
 {
 	auto helper = gcnew Waifu2xConverter::ConvertHelper(converter, source, denoiseLevel, scale, blockSize);

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Waifu2xNET.CLR", "Waifu2xNET.CLR\Waifu2xNET.CLR.vcxproj", "{FDF28C57-AFA6-4084-A9B6-939B76DF41DA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BED97B8B-9411-455A-B104-5D340EB86F02} = {BED97B8B-9411-455A-B104-5D340EB86F02}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "waifu2x-converter-cpp", "waifu2x-converter-cpp", "{7892DE20-DABB-41FC-9400-62E0811B62F1}"
 	ProjectSection(SolutionItems) = preProject
@@ -38,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "models", "models", "{176205
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waifu2xNET.Console", "Waifu2xNET.Console\Waifu2xNET.Console.csproj", "{B3F0979F-7D53-4941-BB93-007ABE596B11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlCommentFilter", "XmlCommentFilter\XmlCommentFilter.csproj", "{BED97B8B-9411-455A-B104-5D340EB86F02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -62,6 +67,14 @@ Global
 		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|x64.Build.0 = Release|x64
 		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|x86.ActiveCfg = Release|x86
 		{B3F0979F-7D53-4941-BB93-007ABE596B11}.Release|x86.Build.0 = Release|x86
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Debug|x64.ActiveCfg = Debug|x64
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Debug|x64.Build.0 = Debug|x64
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Debug|x86.ActiveCfg = Debug|x86
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Debug|x86.Build.0 = Debug|x86
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Release|x64.ActiveCfg = Release|Any CPU
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Release|x64.Build.0 = Release|Any CPU
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Release|x86.ActiveCfg = Release|Any CPU
+		{BED97B8B-9411-455A-B104-5D340EB86F02}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
