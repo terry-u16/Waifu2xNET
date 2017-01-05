@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dll_x64", "dll_x64", "{1C46
 		waifu2x-converter-cpp\dll_x64\w2xc.lib = waifu2x-converter-cpp\dll_x64\w2xc.lib
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "x86", "x86", "{FC885081-A76E-409F-B58C-2201EFB6D5FB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dll_x86", "dll_x86", "{FC885081-A76E-409F-B58C-2201EFB6D5FB}"
 	ProjectSection(SolutionItems) = preProject
 		waifu2x-converter-cpp\dll_x86\w2xc.dll = waifu2x-converter-cpp\dll_x86\w2xc.dll
 		waifu2x-converter-cpp\dll_x86\w2xc.lib = waifu2x-converter-cpp\dll_x86\w2xc.lib
