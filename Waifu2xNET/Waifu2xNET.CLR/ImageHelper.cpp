@@ -110,6 +110,8 @@ WriteableBitmap^ Waifu2xNET::CLR::ComposeAlpha(WriteableBitmap^ bgr24, Writeable
 
 	auto result = gcnew WriteableBitmap(bgr24->PixelWidth, bgr24->PixelHeight, bgr24->DpiX, bgr24->DpiY, PixelFormats::Bgra32, nullptr);
 
+	result->Lock();
+
 	int size = result->PixelWidth * result->PixelHeight;
 	auto bgr24BackBuffer = (Byte*)bgr24->BackBuffer.ToPointer();
 	auto alpha8BackBuffer = (Byte*)alpha8->BackBuffer.ToPointer();
@@ -124,6 +126,8 @@ WriteableBitmap^ Waifu2xNET::CLR::ComposeAlpha(WriteableBitmap^ bgr24, Writeable
 		resultBackBuffer[i] = (a << 24) | (r << 16) | (g << 8) | b;
 	}
 
+	result->AddDirtyRect(System::Windows::Int32Rect(0, 0, result->PixelWidth, result->PixelHeight));
+	result->Unlock();
 	result->Freeze();
 
 	return result;
