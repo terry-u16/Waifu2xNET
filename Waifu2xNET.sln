@@ -32,13 +32,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "models_rgb", "models_rgb", 
 		waifu2x-converter-cpp\models_rgb\scale2.0x_model.json = waifu2x-converter-cpp\models_rgb\scale2.0x_model.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "models", "models", "{176205E0-FB25-40E4-BBE6-25607F4DC1D2}"
-	ProjectSection(SolutionItems) = preProject
-		waifu2x-converter-cpp\models\noise1_model.json = waifu2x-converter-cpp\models\noise1_model.json
-		waifu2x-converter-cpp\models\noise2_model.json = waifu2x-converter-cpp\models\noise2_model.json
-		waifu2x-converter-cpp\models\scale2.0x_model.json = waifu2x-converter-cpp\models\scale2.0x_model.json
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waifu2xNET.Samples.Console", "Samples\Console\Waifu2xNET.Samples.Console.csproj", "{B3F0979F-7D53-4941-BB93-007ABE596B11}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlCommentFilter", "Tools\XmlCommentFilter\XmlCommentFilter.csproj", "{BED97B8B-9411-455A-B104-5D340EB86F02}"
@@ -100,7 +93,6 @@ Global
 		{1C46CA0C-F324-4227-8185-6DA420C92DCC} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
 		{FC885081-A76E-409F-B58C-2201EFB6D5FB} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
 		{27E68D02-57FA-40E7-B2CB-B08953AF1026} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
-		{176205E0-FB25-40E4-BBE6-25607F4DC1D2} = {7892DE20-DABB-41FC-9400-62E0811B62F1}
 		{B3F0979F-7D53-4941-BB93-007ABE596B11} = {7DE981A3-D665-4BD9-8A8A-8D0B67073280}
 		{BED97B8B-9411-455A-B104-5D340EB86F02} = {8AB13BCC-0506-4BB1-8D56-F0C21826CD76}
 		{48BBEDF9-5AC5-474C-9ED5-13944552F33B} = {7DE981A3-D665-4BD9-8A8A-8D0B67073280}
