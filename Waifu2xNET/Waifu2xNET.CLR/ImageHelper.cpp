@@ -22,11 +22,14 @@ WriteableBitmap ^ Waifu2xNET::CLR::GetAlphaChannel(BitmapSource ^ image)
 	auto sourcePixels = (UInt32*)imageBgra32->BackBuffer.ToPointer();
 	auto alphaPixels = (Byte*)alphaChannel->BackBuffer.ToPointer();
 
-	for (int i = 0; i < pixelLength; i++)
+	for (int j = 0; j < imageBgra32->PixelHeight; j++)
 	{
-		UInt32 color = sourcePixels[i];
-		auto alpha = (Byte)((color >> 24) & 0xff);
-		alphaPixels[i] = alpha;
+		for (int i = 0; i < imageBgra32->PixelWidth; i++)
+		{
+			UInt32 color = sourcePixels[i + (imageBgra32->BackBufferStride / 4) * j];
+			auto alpha = (Byte)((color >> 24) & 0xff);
+			alphaPixels[i +  alphaChannel->BackBufferStride * j] = alpha;
+		}
 	}
 
 	return alphaChannel;
@@ -112,18 +115,24 @@ WriteableBitmap^ Waifu2xNET::CLR::ComposeAlpha(WriteableBitmap^ bgr24, Writeable
 
 	result->Lock();
 
-	int size = result->PixelWidth * result->PixelHeight;
 	auto bgr24BackBuffer = (Byte*)bgr24->BackBuffer.ToPointer();
 	auto alpha8BackBuffer = (Byte*)alpha8->BackBuffer.ToPointer();
 	auto resultBackBuffer = (UInt32*)result->BackBuffer.ToPointer();
 
-	for (int i = 0; i < size; i++)
+	for (int j = 0; j < result->PixelHeight; j++)
 	{
-		Byte b = bgr24BackBuffer[3 * i];
-		Byte g = bgr24BackBuffer[3 * i + 1];
-		Byte r = bgr24BackBuffer[3 * i + 2];
-		Byte a = alpha8BackBuffer[i];
-		resultBackBuffer[i] = (a << 24) | (r << 16) | (g << 8) | b;
+		for (int i = 0; i < result->PixelWidth; i++)
+		{
+			int bgr24Position = 3 * i + bgr24->BackBufferStride * j;
+			int alpha8Position = i + alpha8->BackBufferStride * j;
+			int resultBackBufferPosition = i + result->BackBufferStride * j / 4;
+			Byte b = bgr24BackBuffer[bgr24Position];
+			Byte g = bgr24BackBuffer[bgr24Position + 1];
+			Byte r = bgr24BackBuffer[bgr24Position + 2];
+			Byte a = alpha8BackBuffer[alpha8Position];
+
+			resultBackBuffer[resultBackBufferPosition] = (a << 24) | (r << 16) | (g << 8) | b;
+		}
 	}
 
 	result->AddDirtyRect(System::Windows::Int32Rect(0, 0, result->PixelWidth, result->PixelHeight));
